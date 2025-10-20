@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Animasi Emoji dan Uang</title>
+<style>
+  /* Background animasi banyak uang */
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    height: 100vh;
+    background-color: #002200;
+    position: relative;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+  .money-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/100_USD_Obverse.jpg/120px-100_USD_Obverse.jpg');
+    background-size: 100px 40px;
+    background-repeat: repeat;
+    animation: moveMoney 20s linear infinite;
+    opacity: 0.2;
+    z-index: 0;
+  }
+  @keyframes moveMoney {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 0; }
+  }
+
+  /* Tulisan tengah */
+  .center-text {
+    position: fixed;
+    width: 100%;
+    top: 40%;
+    font-size: 2rem;
+    text-align: center;
+    z-index: 100;
+  }
+
+  /* Tulisan paling bawah tengah kecil */
+  .footer-text {
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #ccc;
+    user-select: none;
+    z-index: 100;
+  }
+
+  /* Emoji jatuh */
+  .emoji {
+    position: fixed;
+    font-size: 1.8rem;
+    top: -2rem;
+    user-select: none;
+    pointer-events: none;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    0% { top: -2rem; opacity: 1; }
+    100% { top: 100vh; opacity: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="money-bg"></div>
+  <div class="center-text">mau aja di suruh dongo😹</div>
+  <div class="footer-text">Dari Mas Rusdi</div>
+
+  <script>
+    const emojiCount = 50; 
+    for(let i = 0; i < emojiCount; i++) {
+      const emoji = document.createElement('div');
+      emoji.textContent = '😹';
+      emoji.className = 'emoji';
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationName = 'fall';
+      emoji.style.animationDuration = (3 + Math.random() * 5) + 's';
+      emoji.style.animationDelay = (Math.random() * 8) + 's';
+      document.body.appendChild(emoji);
+    }
+  </script>
+</body>
+</html>
